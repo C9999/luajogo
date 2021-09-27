@@ -1,10 +1,12 @@
+LARGURA_TELA = 320
+ALTURA_TELA = 480
 
 aviao_14bis = {
     src = "imagens/14bis.png",
     largura = 64,
     altura = 64,
-    x = 0,
-    y = 0
+    x = LARGURA_TELA/2 -64/2,
+    y = ALTURA_TELA - 64/2
 }
 
 function move14bis()
@@ -23,9 +25,9 @@ function move14bis()
 end
 
 function love.load()
-    love.window.setMode(320, 480, {resizable = false})
+    love.window.setMode(LARGURA_TELA, ALTURA_TERA, {resizable = false})
     -- love.window.setTitle("14bis vs Meteoros")
-    love.window.setTitle("Nameless game")
+    love.window.setTitle("14bis vs Meteoros")
 
     background = love.graphics.newImage("imagens/background.png")
     aviao_14bis.imagem = love.graphics.newImage(aviao_14bis.src)
