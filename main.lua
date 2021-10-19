@@ -10,6 +10,13 @@ aviao_14bis = {
     y = ALTURA_TELA - 64/2
 }
 
+function temColisao(X1, Y1, L1, A1, X2, Y2, L2, A2 )
+   return X2 < X1 + L1 and
+          X1 < X2 + L2 and
+          Y1 < Y2 + A2 and
+          Y2 < Y1 + A1 
+end
+
 meteoros = {}
 
 function criaMeteoro()
