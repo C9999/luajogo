@@ -7,8 +7,30 @@ aviao_14bis = {
     largura = 55,
     altura = 63,
     x = LARGURA_TELA/2 -64/2,
-    y = ALTURA_TELA - 64/2
+    y = ALTURA_TELA - 64/2,
+    tiro = {}
 }
+
+function daTiro()
+    
+    local tiro = {
+        x = aviao_14bis.x + aviao_14bis.largura/2,
+        y = aviao_14bis.y,
+        largura = 16,
+        altura = 16,
+    }
+    table.insert(aviao_14bis.tiros, tiro)
+end
+
+function moveTiros()
+    for i= #aviao_14bis.tiros, 1, -1 do
+        if aviao_14bis.tiros[i].y > 0 then
+            aviao_14bis.tiros[i].y = aviao_14bis.tiros[i].y -1
+        else
+            table.remove(aviao_14bis.tiros,i)
+        end
+    end
+end
 
 function destroiAviao()
     musica_destruicao:play()
@@ -90,6 +112,7 @@ function love.load()
     background = love.graphics.newImage("imagens/background.png")
     aviao_14bis.imagem = love.graphics.newImage(aviao_14bis.src)
     meteoro_img = love.graphics.newImage("imagens/meteoro.png")
+    tiro_img = love.graphics.newImage("imagens/tiro.png")
 
     musica_ambiente = love.audio.newSource("audios/ambiente.wav")
     musica_ambiente:setLooping(true)
@@ -107,8 +130,17 @@ function love.update(dt)
 
         criaMeteoro()
         moveMeteoros()
-        
+        moveTiros()
         checaColisoes()
+
+    end
+end
+
+function love.keypressed(tecla)
+    if tecla == "escape" then
+        love.event.quit()
+    elseif tecla == "space" then
+        daTiro()
     end
 end
 
@@ -119,5 +151,9 @@ function love.draw()
 
     for k,meteoro in pairs(meteoros) do
         love.graphics.draw(meteoro_img, meteoro.x, meteoro.y)
+    end
+
+    for k, tiro in pairs(aviao_14bis.tiros) do
+        love.graphics.draw(tiro_img, tiro.x, tiro.y)
     end
 end
