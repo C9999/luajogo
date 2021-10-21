@@ -10,6 +10,10 @@ aviao_14bis = {
     y = ALTURA_TELA - 64/2
 }
 
+function daTiro()
+    print("Tiro..")
+end
+
 function destroiAviao()
     musica_destruicao:play()
     
@@ -90,6 +94,7 @@ function love.load()
     background = love.graphics.newImage("imagens/background.png")
     aviao_14bis.imagem = love.graphics.newImage(aviao_14bis.src)
     meteoro_img = love.graphics.newImage("imagens/meteoro.png")
+    tiro_img = love.graphics.newImage("imagens/tiro.png")
 
     musica_ambiente = love.audio.newSource("audios/ambiente.wav")
     musica_ambiente:setLooping(true)
@@ -109,6 +114,14 @@ function love.update(dt)
         moveMeteoros()
         
         checaColisoes()
+    end
+end
+
+function love.keypressed(tecla)
+    if tecla == "escape" then
+        love.event.quit()
+    elseif tecla == "space" then
+        daTiro()
     end
 end
 
