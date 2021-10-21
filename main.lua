@@ -11,6 +11,8 @@ aviao_14bis = {
 }
 
 function destroiAviao()
+    musica_destruicao:play()
+    
     aviao_14bis.src = "imagens/explosao_nave.png",
     aviao_14bis.imagem = love.graphics.newImage(aviao_14bis.src)
     aviao_14bis.largura = 67
@@ -62,10 +64,17 @@ function move14bis()
     end
 end
 
+function trocaMusicaDeFundo()
+    musica_ambiente:stop()
+    musica_game_over:play
+end
+
 function checaColisoes()
     for k, meteoro in pairs(meteoros) do
         if temColisao(meteoro.x, meteoro.y, meteoro.largura, meteoro.altura, 
                         aviao_14bis.x, aviao_14bis.y, aviao_14bis.largura, aviao_14bis.altura) then
+            
+            trocaMusicaDeFundo()
             destroiAviao()
             FIM_JOGO = true
         end
@@ -81,6 +90,13 @@ function love.load()
     background = love.graphics.newImage("imagens/background.png")
     aviao_14bis.imagem = love.graphics.newImage(aviao_14bis.src)
     meteoro_img = love.graphics.newImage("imagens/meteoro.png")
+
+    musica_ambiente = love.audio.newSource("audios/ambiente.wav")
+    musica_ambiente:setLooping(true)
+    musica_ambiente:play()
+
+    musica_destruicao = love.audio.newSource("audios/ambiente.wav")
+    musica_game_over = love.audio.newSource("audios/game_over.wav")
 end
 
 function love.update(dt)
