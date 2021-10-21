@@ -12,7 +12,8 @@ aviao_14bis = {
 }
 
 function daTiro()
-    
+    musica_disparo:play()
+
     local tiro = {
         x = aviao_14bis.x + aviao_14bis.largura/2,
         y = aviao_14bis.y,
@@ -88,10 +89,10 @@ end
 
 function trocaMusicaDeFundo()
     musica_ambiente:stop()
-    musica_game_over:play
+    musica_game_over:play()
 end
 
-function checaColisoes()
+function checaColisaoComAvio()
     for k, meteoro in pairs(meteoros) do
         if temColisao(meteoro.x, meteoro.y, meteoro.largura, meteoro.altura, 
                         aviao_14bis.x, aviao_14bis.y, aviao_14bis.largura, aviao_14bis.altura) then
@@ -101,6 +102,24 @@ function checaColisoes()
             FIM_JOGO = true
         end
     end
+end
+
+function checaColisaoComTiros()
+    for i = #aviao_14bis.tiros, 1, -1 do
+        for j = #meteoros, 1, -1 do
+            if temColisao(aviao_14bis.tiros[i].x, aviao_14bis.tiros[i].y, aviao_14bis.tiros[i].largura, aviao_14bis.tiros[i].altura,
+                            meteoros[j].x, meteoros[j].y, meteoros[j].largura, meteoros[j].altura) then
+                table.remove(aviao_14bis.tiros, i)
+                table.remove(meteoros, j)
+                break
+            end
+        end
+    end
+end
+
+function checaColisoes()
+    checaColisaoComAvio()
+    checaColisaoComTiros()
 end
 
 function love.load()
@@ -120,6 +139,7 @@ function love.load()
 
     musica_destruicao = love.audio.newSource("audios/ambiente.wav")
     musica_game_over = love.audio.newSource("audios/game_over.wav")
+    musica_disparo = love.audio.newSource("audios/disparo.wav")
 end
 
 function love.update(dt)
