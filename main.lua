@@ -177,3 +177,4 @@ function love.draw()
         love.graphics.draw(tiro_img, tiro.x, tiro.y)
     end
 end
+//teste de usuario
