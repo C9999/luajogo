@@ -66,7 +66,7 @@ function criaMeteoro()
 end
 
 function moveMeteoros()
-    for k, v in ipairs(meteoros) do
+    for k, meteoro in pairs(meteoros) do
         meteoro.y = meteoro.y + meteoro.peso
         meteoro.x = meteoro.x + meteoro.deslocamento_horizontal
     end
