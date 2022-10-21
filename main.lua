@@ -172,6 +172,7 @@ function love.keypressed(tecla)
     end
 end
 
+
 function love.draw()
     love.graphics.draw(background, 0, 0)
 
