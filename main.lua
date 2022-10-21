@@ -1,6 +1,6 @@
 LARGURA_TELA = 320
 ALTURA_TELA = 480
--- MAX_METEOROS = 12
+MAX_METEOROS = 12
 
 aviao_14bis = {
     src = "imagens/14bis.png",
@@ -50,6 +50,14 @@ function temColisao(X1, Y1, L1, A1, X2, Y2, L2, A2 )
 end
 
 meteoros = {}
+
+function removeMeteoros()
+    for i = #meteoros, 1, -1 do
+        if meteoros[i].y > ALTURA_TELA then
+            table.remove(meteoros,i)
+        end
+    end
+end
 
 function criaMeteoro()
     meteoro = {
