@@ -1,6 +1,6 @@
 LARGURA_TELA = 320
 ALTURA_TELA = 480
--- MAX_METEOROS = 12
+MAX_METEOROS = 12
 
 aviao_14bis = {
     src = "imagens/14bis.png",
@@ -51,6 +51,14 @@ end
 
 meteoros = {}
 
+function removeMeteoros()
+    for i = #meteoros, 1, -1 do
+        if meteoros[i].y > ALTURA_TELA then
+            table.remove(meteoros,i)
+        end
+    end
+end
+
 function criaMeteoro()
     meteoro = {
         -- src = "imagens/meteoro.png",
@@ -66,7 +74,7 @@ function criaMeteoro()
 end
 
 function moveMeteoros()
-    for k, v in ipairs(meteoros) do
+    for k, meteoro in pairs(meteoros) do
         meteoro.y = meteoro.y + meteoro.peso
         meteoro.x = meteoro.x + meteoro.deslocamento_horizontal
     end
@@ -163,6 +171,7 @@ function love.keypressed(tecla)
         daTiro()
     end
 end
+
 
 function love.draw()
     love.graphics.draw(background, 0, 0)
