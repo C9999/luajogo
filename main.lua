@@ -141,13 +141,13 @@ function love.load()
     meteoro_img = love.graphics.newImage("imagens/meteoro.png")
     tiro_img = love.graphics.newImage("imagens/tiro.png")
 
-    musica_ambiente = love.audio.newSource("audios/ambiente.wav")
+    musica_ambiente = love.audio.newSource("audios/ambiente.wav", "static")
     musica_ambiente:setLooping(true)
     musica_ambiente:play()
 
-    musica_destruicao = love.audio.newSource("audios/destruicao.wav")
-    musica_game_over = love.audio.newSource("audios/game_over.wav")
-    musica_disparo = love.audio.newSource("audios/disparo.wav")
+    musica_destruicao = love.audio.newSource("audios/destruicao.wav", "static")
+    musica_game_over = love.audio.newSource("audios/game_over.wav", "static")
+    musica_disparo = love.audio.newSource("audios/disparo.wav", "static")
 end
 
 function love.update(dt)
