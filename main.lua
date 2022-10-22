@@ -145,7 +145,7 @@ function love.load()
     musica_ambiente:setLooping(true)
     musica_ambiente:play()
 
-    musica_destruicao = love.audio.newSource("audios/ambiente.wav")
+    musica_destruicao = love.audio.newSource("audios/destruicao.wav")
     musica_game_over = love.audio.newSource("audios/game_over.wav")
     musica_disparo = love.audio.newSource("audios/disparo.wav")
 end
@@ -171,7 +171,6 @@ function love.keypressed(tecla)
         daTiro()
     end
 end
-
 
 function love.draw()
     love.graphics.draw(background, 0, 0)
